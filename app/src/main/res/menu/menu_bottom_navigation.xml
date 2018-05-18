@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/it_meditate"
+        android:icon="@drawable/ic_play_circle_filled_24dp"
+        android:title="Meditate"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/it_person"
+        android:icon="@drawable/ic_person_24dp"
+        android:title="Me"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/it_more"
+        android:icon="@drawable/ic_more_horiz_24dp"
+        android:title="More"
+        app:showAsAction="always" />
+</menu>

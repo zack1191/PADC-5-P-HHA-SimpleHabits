@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_medium"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/img_unsplash"
+        android:padding="@dimen/margin_medium_3">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_whatshot_24dp" />
+
+        <TextView
+            android:id="@+id/tv_basic"
+            style="@style/fontsyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_toRightOf="@id/iv_icon"
+            android:text="Basics"
+            android:textColor="@color/whitefull"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_disc"
+            style="@style/fontsyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_basic"
+            android:layout_below="@id/tv_basic"
+            android:text="Learn meditation fundamentals"
+            android:textColor="@color/whitefull"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
