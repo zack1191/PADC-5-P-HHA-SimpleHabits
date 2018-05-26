@@ -10,16 +10,27 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.hha.heinhtetaung.simplehabits.adapters.AllTopicAdapter;
 import com.hha.heinhtetaung.simplehabits.adapters.BottomBarAdapter;
 import com.hha.heinhtetaung.simplehabits.adapters.TabAdapter;
+import com.hha.heinhtetaung.simplehabits.data.vo.TopicVO;
+import com.hha.heinhtetaung.simplehabits.event.LoadTopicEvent;
 import com.hha.heinhtetaung.simplehabits.fragments.MeditateFragment;
 import com.hha.heinhtetaung.simplehabits.fragments.OnthegoFragment;
 import com.hha.heinhtetaung.simplehabits.fragments.SeriesFragment;
 import com.hha.heinhtetaung.simplehabits.fragments.TeachersFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private TabAdapter mTabAdapter;
 
     private BottomBarAdapter mBottomBarAdapter;
+    private AllTopicAdapter mAllTopicAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +97,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
+
 }

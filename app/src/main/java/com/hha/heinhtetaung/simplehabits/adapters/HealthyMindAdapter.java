@@ -8,29 +8,48 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hha.heinhtetaung.simplehabits.R;
-import com.hha.heinhtetaung.simplehabits.viewholders.HealthyMindViewHolders;
+import com.hha.heinhtetaung.simplehabits.data.vo.CategoriesProgramVO;
+import com.hha.heinhtetaung.simplehabits.data.vo.ProgramVO;
+import com.hha.heinhtetaung.simplehabits.viewholders.ItemHealthyMindViewHolder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by E5 on 5/18/2018.
+ * Created by E5 on 5/22/2018.
  */
 
-public class HealthyMindAdapter extends RecyclerView.Adapter<HealthyMindViewHolders> {
+public class HealthyMindAdapter extends RecyclerView.Adapter<ItemHealthyMindViewHolder> {
+    private List<CategoriesProgramVO> mCategoriesProgram;
+
+    public HealthyMindAdapter() {
+        mCategoriesProgram = new ArrayList<>();
+    }
+
+    public void setCategoriesProgram(List<CategoriesProgramVO> categoriesProgram) {
+        mCategoriesProgram = categoriesProgram;
+        notifyDataSetChanged();
+    }
+
+
     @NonNull
     @Override
-    public HealthyMindViewHolders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ItemHealthyMindViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.item_healthy_mind, parent, false);
-        return new HealthyMindViewHolders(view);
+        ItemHealthyMindViewHolder itemHealthyMindViewHolder = new ItemHealthyMindViewHolder(view);
+        return itemHealthyMindViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HealthyMindViewHolders holder, int position) {
-
+    public void onBindViewHolder(@NonNull ItemHealthyMindViewHolder holder, int position) {
+        holder.setCategories(mCategoriesProgram.get(position));
     }
+
 
     @Override
     public int getItemCount() {
-        return 8;
+        return mCategoriesProgram.size();
     }
 }

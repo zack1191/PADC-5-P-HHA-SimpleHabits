@@ -8,14 +8,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/img_unsplash"
-        android:padding="@dimen/margin_medium_3">
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/iv_topic_background"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#b3e5fc" />
+
 
         <ImageView
             android:id="@+id/iv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium_3"
             android:padding="16dp"
             android:src="@drawable/ic_whatshot_24dp" />
 
@@ -24,11 +30,11 @@
             style="@style/fontsyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_large"
             android:layout_toRightOf="@id/iv_icon"
             android:text="Basics"
             android:textColor="@color/whitefull"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView

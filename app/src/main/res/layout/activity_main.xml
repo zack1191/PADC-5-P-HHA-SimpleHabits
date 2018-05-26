@@ -46,7 +46,6 @@
         android:background="#37474f"
         app:itemIconTint="#bdbdbd"
         app:itemTextColor="#bdbdbd"
-        app:layout_behavior="@string/bottom_sheet_behavior"
         app:menu="@menu/menu_bottom_navigation" />
 
 </android.support.design.widget.CoordinatorLayout>

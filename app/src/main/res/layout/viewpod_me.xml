@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hha.heinhtetaung.simplehabits.viewpods.ViewPodMe xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#f48fb1">
+
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium_3"
+                android:padding="16dp"
+                android:src="@drawable/ic_whatshot_24dp" />
+
+            <TextView
+                android:id="@+id/tv_basic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_toRightOf="@id/iv_icon"
+                android:text="@string/get_unlimTited_access"
+                android:textColor="@color/whitefull"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_disc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv_basic"
+                android:layout_below="@id/tv_basic"
+                android:text="@string/second_disc"
+                android:textColor="@color/whitefull"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium_3"
+                android:padding="16dp"
+                android:src="@drawable/ic_keyboard_arrow_right_24dp" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+</com.hha.heinhtetaung.simplehabits.viewpods.ViewPodMe>

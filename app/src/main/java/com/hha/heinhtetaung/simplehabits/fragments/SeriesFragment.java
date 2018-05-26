@@ -6,18 +6,23 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.hha.heinhtetaung.simplehabits.R;
+import com.hha.heinhtetaung.simplehabits.SimpleHabitApp;
 import com.hha.heinhtetaung.simplehabits.adapters.AllTopicAdapter;
-import com.hha.heinhtetaung.simplehabits.adapters.HealthyMindAdapter;
-import com.hha.heinhtetaung.simplehabits.adapters.MostPopularAdapter;
-import com.hha.heinhtetaung.simplehabits.adapters.ToSleepBetterAdapter;
-import com.hha.heinhtetaung.simplehabits.viewholders.AllTopicViewHolder;
-import com.hha.heinhtetaung.simplehabits.viewholders.ItemToSleepBetterViewHolders;
-import com.hha.heinhtetaung.simplehabits.viewholders.MostPopularViewHolder;
+import com.hha.heinhtetaung.simplehabits.adapters.SeriesAdapter;
+import com.hha.heinhtetaung.simplehabits.data.models.SimpleModel;
+
+import com.hha.heinhtetaung.simplehabits.event.LoadTopicEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,51 +32,53 @@ import butterknife.ButterKnife;
  */
 
 public class SeriesFragment extends Fragment {
-    private HealthyMindAdapter healthyMindAdapter;
 
-    @BindView(R.id.rv_healty)
-    RecyclerView rvHealthy;
 
-    @BindView(R.id.rv_tosleep)
-    RecyclerView rvToSleep;
+    @BindView(R.id.rv_list)
+    RecyclerView rvList;
 
-    @BindView(R.id.rv_most_popular)
-    RecyclerView rvMostPopular;
+    private SeriesAdapter mSeriesAdapter = new SeriesAdapter();
+    private AllTopicAdapter mAllTopicAdapter = new AllTopicAdapter();
 
-    @BindView(R.id.rv_all_topic)
-    RecyclerView rvAllTopic;
-
-    private ItemToSleepBetterViewHolders itemToSleepBetterViewHolders;
-    private MostPopularViewHolder mostPopularViewHolder;
-    private AllTopicViewHolder allTopicViewHolder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_series, container, false);
         ButterKnife.bind(this, view);
-        HealthyMindAdapter healthyMindAdapter = new HealthyMindAdapter();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        rvHealthy.setAdapter(healthyMindAdapter);
-        rvHealthy.setLayoutManager(linearLayoutManager);
 
-        ToSleepBetterAdapter toSleepBetterAdapter = new ToSleepBetterAdapter();
-        LinearLayoutManager lmToSleep = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        rvToSleep.setAdapter(toSleepBetterAdapter);
-        rvToSleep.setLayoutManager(lmToSleep);
+        mSeriesAdapter = new SeriesAdapter();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
+        rvList.setLayoutManager(linearLayoutManager);
+        rvList.setAdapter(mSeriesAdapter);
 
-        MostPopularAdapter mostPopularAdapter = new MostPopularAdapter();
-        LinearLayoutManager lmMostPopular = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        rvMostPopular.setLayoutManager(lmMostPopular);
-        rvMostPopular.setAdapter(mostPopularAdapter);
-
-        AllTopicAdapter allTopicAdapter = new AllTopicAdapter();
-        LinearLayoutManager lmAllTopic = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        rvAllTopic.setLayoutManager(lmAllTopic);
-        rvAllTopic.setAdapter(allTopicAdapter);
 
         return view;
 
 
     }
+
+
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        EventBus.getDefault().register(this);
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        EventBus.getDefault().unregister(this);
+//    }
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onLoadedTopics(LoadTopicEvent event) {
+//        Log.d(SimpleHabitApp.LOG_TAG, "onLoadedTopics" + event.getTopics().size());
+//
+//        mAllTopicAdapter.setTopics(event.getTopics());
+//
+//    }
+
+
 }
