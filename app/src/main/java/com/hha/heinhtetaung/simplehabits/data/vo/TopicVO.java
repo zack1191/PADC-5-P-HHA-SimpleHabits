@@ -1,6 +1,7 @@
 package com.hha.heinhtetaung.simplehabits.data.vo;
 
 import com.google.gson.annotations.SerializedName;
+import com.hha.heinhtetaung.simplehabits.ShareParentVO;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -8,7 +9,7 @@ import org.greenrobot.eventbus.Subscribe;
  * Created by E5 on 5/23/2018.
  */
 
-public class TopicVO {
+public class TopicVO implements ShareParentVO {
 
     @SerializedName("topic-name")
     private String topicName;

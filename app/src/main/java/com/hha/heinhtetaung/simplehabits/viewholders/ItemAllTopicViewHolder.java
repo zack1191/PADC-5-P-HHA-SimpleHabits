@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
  * Created by E5 on 5/22/2018.
  */
 
-public class ItemAllTopicViewHolder extends RecyclerView.ViewHolder {
+public class ItemAllTopicViewHolder extends BaseViewHolder<TopicVO> {
     @BindView(R.id.tv_basic)
     TextView tvHeader;
 
@@ -37,17 +37,12 @@ public class ItemAllTopicViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setTopic(TopicVO topic) {
-
-        tvDisc.setText(topic.getTopicDesc());
-        tvHeader.setText(topic.getTopicName());
-        Glide.with(ivIcon.getContext())
-                .load(topic.getIcon())
-                .into(ivIcon);
-        Glide.with(ivBackground.getContext())
-                .load(topic.getBackground())
-                .into(ivBackground);
+    @Override
+    public void setData(TopicVO data) {
+        tvDisc.setText(data.getTopicDesc());
+        tvHeader.setText(data.getTopicName());
     }
+
 
 
 }

@@ -1,12 +1,13 @@
 package com.hha.heinhtetaung.simplehabits.data.vo;
 
 import com.google.gson.annotations.SerializedName;
+import com.hha.heinhtetaung.simplehabits.ShareParentVO;
 
 /**
  * Created by E5 on 5/23/2018.
  */
 
-public class SessionsVO {
+public class SessionsVO  {
     @SerializedName("session-id")
     private String sessionId;
 

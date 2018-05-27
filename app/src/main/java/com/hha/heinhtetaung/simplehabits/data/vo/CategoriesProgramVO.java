@@ -1,6 +1,7 @@
 package com.hha.heinhtetaung.simplehabits.data.vo;
 
 import com.google.gson.annotations.SerializedName;
+import com.hha.heinhtetaung.simplehabits.ShareParentVO;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * Created by E5 on 5/23/2018.
  */
 
-public class CategoriesProgramVO {
+public class CategoriesProgramVO implements ShareParentVO{
     @SerializedName("category-id")
     private String categoryId;
 

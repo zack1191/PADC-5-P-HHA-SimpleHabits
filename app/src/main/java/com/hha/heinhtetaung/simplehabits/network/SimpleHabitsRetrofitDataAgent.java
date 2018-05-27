@@ -1,17 +1,13 @@
 package com.hha.heinhtetaung.simplehabits.network;
 
 import com.google.gson.Gson;
-import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
-import com.hha.heinhtetaung.simplehabits.event.LoadCategoriesEvent;
-import com.hha.heinhtetaung.simplehabits.event.LoadCurrentProgramEvent;
-import com.hha.heinhtetaung.simplehabits.event.LoadTopicEvent;
+import com.hha.heinhtetaung.simplehabits.event.LoadSimpleHabitEvent;
 import com.hha.heinhtetaung.simplehabits.network.response.GetCategoriesResponse;
 import com.hha.heinhtetaung.simplehabits.network.response.GetCurrentProgramResponse;
 import com.hha.heinhtetaung.simplehabits.network.response.GetTopicResponse;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -64,7 +60,7 @@ public class SimpleHabitsRetrofitDataAgent implements SimpleHabitsDataAgent {
             public void onResponse(Call<GetTopicResponse> call, Response<GetTopicResponse> response) {
                 GetTopicResponse getTopicResponse = response.body();
                 if (getTopicResponse != null) {
-                    LoadTopicEvent event = new LoadTopicEvent(getTopicResponse.getTopics());
+                    LoadSimpleHabitEvent.LoadTopicEvent event = new LoadSimpleHabitEvent.LoadTopicEvent(getTopicResponse.getTopics());
                     EventBus.getDefault().post(event);
 
                 }
@@ -86,7 +82,7 @@ public class SimpleHabitsRetrofitDataAgent implements SimpleHabitsDataAgent {
             public void onResponse(Call<GetCurrentProgramResponse> call, Response<GetCurrentProgramResponse> response) {
                 GetCurrentProgramResponse getCurrentProgramResponse = response.body();
                 if (getCurrentProgramResponse != null) {
-                    LoadCurrentProgramEvent event = new LoadCurrentProgramEvent(getCurrentProgramResponse.getCurrentProgram());
+                    LoadSimpleHabitEvent.LoadCurrentProgramEvent event = new LoadSimpleHabitEvent.LoadCurrentProgramEvent(getCurrentProgramResponse.getCurrentProgram());
                     EventBus.getDefault().post(event);
                 }
             }
@@ -107,7 +103,7 @@ public class SimpleHabitsRetrofitDataAgent implements SimpleHabitsDataAgent {
             public void onResponse(Call<GetCategoriesResponse> call, Response<GetCategoriesResponse> response) {
                 GetCategoriesResponse getCategoriesResponse1 = response.body();
                 if (getCategoriesResponse1 != null) {
-                    LoadCategoriesEvent event = new LoadCategoriesEvent(getCategoriesResponse1.getCategoriesPrograms());
+                    LoadSimpleHabitEvent.LoadCategoriesEvent event = new LoadSimpleHabitEvent.LoadCategoriesEvent(getCategoriesResponse1.getCategoriesPrograms());
                     EventBus.getDefault().post(event);
                 }
 

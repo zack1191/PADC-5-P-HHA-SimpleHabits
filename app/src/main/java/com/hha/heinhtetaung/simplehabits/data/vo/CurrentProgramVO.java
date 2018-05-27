@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 import com.google.gson.annotations.SerializedName;
+import com.hha.heinhtetaung.simplehabits.ShareParentVO;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import java.util.ListIterator;
  * Created by E5 on 5/23/2018.
  */
 
-public class CurrentProgramVO  {
+public class CurrentProgramVO implements ShareParentVO{
     @SerializedName("program-id")
     private String programId;
 

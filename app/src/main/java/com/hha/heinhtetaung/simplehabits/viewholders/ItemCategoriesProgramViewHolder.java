@@ -17,20 +17,22 @@ import butterknife.ButterKnife;
  * Created by E5 on 5/22/2018.
  */
 
-public class ItemHealthyMindViewHolder extends RecyclerView.ViewHolder {
+public class ItemCategoriesProgramViewHolder extends BaseViewHolder<ProgramVO> {
     @BindView(R.id.tv_title_healthy)
     TextView tvTitleHealthy;
 
     @BindView(R.id.tv_healty_length)
     TextView tvLength;
 
-    public ItemHealthyMindViewHolder(View itemView) {
+    public ItemCategoriesProgramViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void setCategories(CategoriesProgramVO categories) {
-        tvTitleHealthy.setText(categories.getTitle());
-
+    @Override
+    public void setData(ProgramVO data) {
+        tvTitleHealthy.setText(data.getTitle());
     }
+
+
 }

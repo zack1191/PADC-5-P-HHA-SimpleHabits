@@ -15,21 +15,23 @@ import butterknife.ButterKnife;
  * Created by E5 on 5/26/2018.
  */
 
-public class ItemStartHereViewHolder extends RecyclerView.ViewHolder {
+public class ItemCurrentProgramViewHolder extends BaseViewHolder<CurrentProgramVO> {
     @BindView(R.id.tv_habit)
     TextView tvTitle;
 
     @BindView(R.id.btn_start)
     Button btnStart;
 
-    public ItemStartHereViewHolder(View itemView) {
+    public ItemCurrentProgramViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void setCurrentProgram(CurrentProgramVO currentProgram) {
-        tvTitle.setText(currentProgram.getTitle());
-        btnStart.setText(currentProgram.getCurrentPeriod());
+    @Override
+    public void setData(CurrentProgramVO data) {
+        tvTitle.setText(data.getTitle());
+        btnStart.setText(data.getCurrentPeriod());
     }
+
 
 }

@@ -1,92 +1,92 @@
 package com.hha.heinhtetaung.simplehabits.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.hha.heinhtetaung.simplehabits.R;
 
-import com.hha.heinhtetaung.simplehabits.viewholders.AllTopicViewHolder;
-import com.hha.heinhtetaung.simplehabits.viewholders.HealthyMindViewHolders;
-import com.hha.heinhtetaung.simplehabits.viewholders.StartHereViewHolder;
-import com.hha.heinhtetaung.simplehabits.viewholders.ToSleepBetterViewHolders;
-import com.hha.heinhtetaung.simplehabits.viewholders.MostPopularViewHolder;
+import com.hha.heinhtetaung.simplehabits.ShareParentVO;
+import com.hha.heinhtetaung.simplehabits.data.vo.CategoriesProgramVO;
+import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
+import com.hha.heinhtetaung.simplehabits.data.vo.TopicVO;
+import com.hha.heinhtetaung.simplehabits.viewholders.BaseViewHolder;
+import com.hha.heinhtetaung.simplehabits.viewholders.CategoriesProgramViewHolder;
+import com.hha.heinhtetaung.simplehabits.viewholders.ItemAllTopicViewHolder;
+import com.hha.heinhtetaung.simplehabits.viewholders.ItemCurrentProgramViewHolder;
 
 /**
  * Created by E5 on 5/22/2018.
  */
 
-public class SeriesAdapter extends RecyclerView.Adapter {
+public class SeriesAdapter extends BaseRecyclerAdapter<BaseViewHolder, ShareParentVO> {
 
-
-    public SeriesAdapter() {
-
-    }
 
     private static final int START_HERE = 0;
     private static final int HEALTHY_MIND = 1;
-    private static final int TO_SLEEP_BETTER = 2;
-    private static final int MOST_POPULAR = 3;
-    private static final int ALL_TOPICS = 4;
+    private static final int ALL_TOPICS = 2;
+
+    public SeriesAdapter(Context context) {
+        super(context);
+    }
+
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder viewHolder = null;
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        BaseViewHolder viewHolder = null;
         switch (viewType) {
             case START_HERE:
-                viewHolder = new StartHereViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_start_here, parent, false));
+                viewHolder = new ItemCurrentProgramViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_start_here, parent, false));
                 break;
             case HEALTHY_MIND:
-                viewHolder = new HealthyMindViewHolders(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_healthy_mind, parent, false));
+                viewHolder = new CategoriesProgramViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_healthy_mind, parent, false));
+                break;
 
-                break;
-            case TO_SLEEP_BETTER:
-                viewHolder = new ToSleepBetterViewHolders(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_to_sleep_better, parent, false));
-                break;
-            case MOST_POPULAR:
-                viewHolder = new MostPopularViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_most_popular, parent, false));
-                break;
             case ALL_TOPICS:
-                viewHolder = new AllTopicViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_all_topics, parent, false));
+                viewHolder = new ItemAllTopicViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_all_topic, parent, false));
                 break;
         }
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+        holder.setData(mData.get(position));
     }
 
 
     @Override
     public int getItemViewType(int position) {
-        int i = 0;
-        switch (position) {
-            case 0:
-                i = START_HERE;
-                break;
-            case 1:
-                i = HEALTHY_MIND;
-                break;
-            case 2:
-                i = TO_SLEEP_BETTER;
-                break;
-            case 3:
-                i = MOST_POPULAR;
-                break;
-            case 4:
-                i = ALL_TOPICS;
-                break;
+//        int i = 0;
+//        switch (position) {
+//            case 0:
+//                i = START_HERE;
+//                break;
+//            case 1:
+//                i = HEALTHY_MIND;
+//                break;
+//
+//            case 4:
+//                i = ALL_TOPICS;
+//                break;
+//        }return position;
+        if (mData.get(position) instanceof CurrentProgramVO) {
+            return START_HERE;
+        } else if (mData.get(position) instanceof CategoriesProgramVO) {
+            return HEALTHY_MIND;
+        } else if (mData.get(position) instanceof TopicVO) {
+            return ALL_TOPICS;
         }
-        return i;
+        return position;
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return mData.size();
     }
 
 
