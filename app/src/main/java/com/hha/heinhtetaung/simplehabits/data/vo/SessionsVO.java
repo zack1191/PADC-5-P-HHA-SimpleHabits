@@ -7,7 +7,7 @@ import com.hha.heinhtetaung.simplehabits.ShareParentVO;
  * Created by E5 on 5/23/2018.
  */
 
-public class SessionsVO  {
+public class SessionsVO implements ShareParentVO {
     @SerializedName("session-id")
     private String sessionId;
 

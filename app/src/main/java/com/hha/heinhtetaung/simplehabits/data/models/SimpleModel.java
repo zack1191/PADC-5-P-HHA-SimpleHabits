@@ -1,6 +1,7 @@
 package com.hha.heinhtetaung.simplehabits.data.models;
 
 import com.hha.heinhtetaung.simplehabits.ShareParentVO;
+import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
 import com.hha.heinhtetaung.simplehabits.event.LoadReadyDataEvent;
 import com.hha.heinhtetaung.simplehabits.event.LoadSimpleHabitEvent;
 import com.hha.heinhtetaung.simplehabits.network.SimpleHabitsDataAgent;
@@ -12,6 +13,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by E5 on 5/23/2018.
@@ -65,6 +67,7 @@ public class SimpleModel {
 
     public void loadDatas() {
         SimpleHabitsRetrofitDataAgent.getsObjInstance().loadCurrentProgram();
+
     }
 
 

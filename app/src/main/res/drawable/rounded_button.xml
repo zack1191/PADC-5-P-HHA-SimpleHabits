@@ -4,7 +4,8 @@
 
         android:color="#b3e5fc" />
 
-    <solid android:color="#b3e5fc" />
+    <!--<solid android:color="#b3e5fc" />-->
+    <solid android:color="@color/colorAccent" />
 
     <corners android:radius="200dp" />
 </shape>

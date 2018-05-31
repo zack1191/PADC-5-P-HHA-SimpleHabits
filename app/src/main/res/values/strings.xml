@@ -1,8 +1,9 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SimpleHabits</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="get_unlimTited_access">Get Unlimited Access</string>
     <string name="second_disc">To the world\'s best teachers</string>
+    <string name="download_disc" tools:ignore="TypographyEllipsis">This is our signature 7 days introductory course to mindfulness meditation.In this series, you will learn the basic techniques...</string>
 </resources>
