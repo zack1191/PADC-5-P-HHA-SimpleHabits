@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.hha.heinhtetaung.simplehabits.R;
 import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
-import com.hha.heinhtetaung.simplehabits.delegate.SimpleHabitsDelegate;
+import com.hha.heinhtetaung.simplehabits.delegate.CurrentProgramDelegate;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,9 +24,9 @@ public class ItemCurrentProgramViewHolder extends BaseViewHolder<CurrentProgramV
     Button btnStart;
 
     private CurrentProgramVO mCurrent;
-    private SimpleHabitsDelegate mCurrentProgramDelegate;
+    private CurrentProgramDelegate mCurrentProgramDelegate;
 
-    public ItemCurrentProgramViewHolder(View itemView, SimpleHabitsDelegate currentProgramDelegate) {
+    public ItemCurrentProgramViewHolder(View itemView, CurrentProgramDelegate currentProgramDelegate) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         mCurrentProgramDelegate = currentProgramDelegate;
@@ -42,7 +42,7 @@ public class ItemCurrentProgramViewHolder extends BaseViewHolder<CurrentProgramV
 
     @OnClick(R.id.btn_start)
     public void onTapCurrentProgram(View view) {
-        mCurrentProgramDelegate.onTapStartHere(mCurrent);
+        mCurrentProgramDelegate.onTapStartHere();
     }
 
 

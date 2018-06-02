@@ -1,6 +1,7 @@
 package com.hha.heinhtetaung.simplehabits.network;
 
 import com.google.gson.Gson;
+import com.hha.heinhtetaung.simplehabits.event.LoadNetworkErrorEvent;
 import com.hha.heinhtetaung.simplehabits.event.LoadSimpleHabitEvent;
 import com.hha.heinhtetaung.simplehabits.network.response.GetCategoriesResponse;
 import com.hha.heinhtetaung.simplehabits.network.response.GetCurrentProgramResponse;
@@ -68,7 +69,8 @@ public class SimpleHabitsRetrofitDataAgent implements SimpleHabitsDataAgent {
 
             @Override
             public void onFailure(Call<GetTopicResponse> call, Throwable t) {
-
+                LoadNetworkErrorEvent errorEvent = new LoadNetworkErrorEvent();
+                EventBus.getDefault().post(errorEvent);
             }
         });
 
@@ -89,7 +91,8 @@ public class SimpleHabitsRetrofitDataAgent implements SimpleHabitsDataAgent {
 
             @Override
             public void onFailure(Call<GetCurrentProgramResponse> call, Throwable t) {
-
+                LoadNetworkErrorEvent errorEvent = new LoadNetworkErrorEvent();
+                EventBus.getDefault().post(errorEvent);
             }
         });
 
@@ -111,7 +114,8 @@ public class SimpleHabitsRetrofitDataAgent implements SimpleHabitsDataAgent {
 
             @Override
             public void onFailure(Call<GetCategoriesResponse> call, Throwable t) {
-
+                LoadNetworkErrorEvent errorEvent = new LoadNetworkErrorEvent();
+                EventBus.getDefault().post(errorEvent);
             }
         });
     }

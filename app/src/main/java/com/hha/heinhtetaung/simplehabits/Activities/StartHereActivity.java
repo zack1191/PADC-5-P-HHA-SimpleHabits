@@ -9,10 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hha.heinhtetaung.simplehabits.R;
 import com.hha.heinhtetaung.simplehabits.SimpleHabitApp;
 import com.hha.heinhtetaung.simplehabits.adapters.SessionsAdapter;
@@ -45,6 +47,9 @@ public class StartHereActivity extends AppCompatActivity {
     @BindView(R.id.tv_download_disc)
     TextView tvDownLoadDisc;
 
+    @BindView(R.id.tv_current_title)
+    TextView tvCurrentTitle;
+
     @BindView(R.id.tb_tool_bar)
     Toolbar toolbar;
 
@@ -54,10 +59,20 @@ public class StartHereActivity extends AppCompatActivity {
 
     private SessionsAdapter mSessionsAdapter;
     private CurrentProgramVO currentProgramVO;
+    private ProgramVO programVO;
     private List<CategoriesProgramVO> categoriesProgramVO;
 
-    public static Intent newIntent(Context context) {
+    public static Intent newIntentCurrent(Context context) {
         Intent intent = new Intent(context, StartHereActivity.class);
+        intent.putExtra(SimpleHabitApp.VIEW_TYPE, SimpleHabitApp.CURRENT_PROGRAM);
+        return intent;
+    }
+
+    public static Intent newIntentCategories(Context context, String categoryId, String categoryProgramId) {
+        Intent intent = new Intent(context, StartHereActivity.class);
+        intent.putExtra(SimpleHabitApp.VIEW_TYPE, SimpleHabitApp.CATEGORY);
+        intent.putExtra(SimpleHabitApp.CATEGORY_ID, categoryId);
+        intent.putExtra(SimpleHabitApp.CATEGORY_PROGRAM_ID, categoryProgramId);
         return intent;
     }
 
@@ -81,13 +96,22 @@ public class StartHereActivity extends AppCompatActivity {
         rvSessions.setLayoutManager(layoutManager);
         rvSessions.setAdapter(mSessionsAdapter);
 
-        int viewtype = getIntent().getIntExtra(SimpleHabitApp.CURRENT_PROGRAM, 0);
 
-        currentProgramVO = (CurrentProgramVO) SimpleModel.getsObjInstance().getSerisData().get(viewtype);
-        mSessionsAdapter.setNewData(currentProgramVO.getSessions());
+        if (getIntent().getStringExtra(SimpleHabitApp.VIEW_TYPE).equals(SimpleHabitApp.CURRENT_PROGRAM)) {
+            CurrentProgramVO currentProgram = SimpleModel.getsObjInstance().getCurrentProgram();
+            mSessionsAdapter.setNewData(currentProgram.getSessions());
+            tvCurrentTitle.setText(currentProgram.getTitle());
+            tvDownLoadDisc.setText(currentProgram.getDescription());
+        } else if (getIntent().getStringExtra(SimpleHabitApp.VIEW_TYPE).equals(SimpleHabitApp.CATEGORY)) {
+            String categoryId = getIntent().getStringExtra(SimpleHabitApp.CATEGORY_ID);
+            String categoryProgramId = getIntent().getStringExtra(SimpleHabitApp.CATEGORY_PROGRAM_ID);
 
-        tvDownLoadDisc.setText(currentProgramVO.getDescription());
-        
+            ProgramVO categoryProgram = SimpleModel.getsObjInstance().getProgram(categoryId, categoryProgramId);
+            mSessionsAdapter.setNewData(categoryProgram.getSessions());
+            tvCurrentTitle.setText(categoryProgram.getTitle());
+            tvDownLoadDisc.setText(categoryProgram.getDescription());
+        }
+
     }
 
 

@@ -18,6 +18,7 @@ public class ProgramVO {
 
     private String image;
 
+
     private String description;
 
     @SerializedName("average-lengths")

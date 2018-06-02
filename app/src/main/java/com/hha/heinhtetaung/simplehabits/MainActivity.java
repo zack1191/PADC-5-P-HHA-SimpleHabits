@@ -1,5 +1,6 @@
 package com.hha.heinhtetaung.simplehabits;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
@@ -11,8 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.hha.heinhtetaung.simplehabits.Activities.StartHereActivity;
 import com.hha.heinhtetaung.simplehabits.adapters.BottomBarAdapter;
 import com.hha.heinhtetaung.simplehabits.adapters.TabAdapter;
+import com.hha.heinhtetaung.simplehabits.delegate.CategoriesProgramDelegate;
+import com.hha.heinhtetaung.simplehabits.delegate.CurrentProgramDelegate;
 import com.hha.heinhtetaung.simplehabits.fragments.MeFragment;
 import com.hha.heinhtetaung.simplehabits.fragments.MeditateFragment;
 import com.hha.heinhtetaung.simplehabits.fragments.MoreFragment;
@@ -23,11 +27,10 @@ import com.hha.heinhtetaung.simplehabits.fragments.TeachersFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CurrentProgramDelegate, CategoriesProgramDelegate {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
 
 
     @BindView(R.id.bottom_navigation)
@@ -86,4 +89,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onTapCategories(String categoryId, String categoryProgramId) {
+        Intent intent = StartHereActivity.newIntentCategories(getApplicationContext(), categoryId, categoryProgramId);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onTapStartHere() {
+        Intent intent = StartHereActivity.newIntentCurrent(getApplicationContext());
+        startActivity(intent);
+    }
 }

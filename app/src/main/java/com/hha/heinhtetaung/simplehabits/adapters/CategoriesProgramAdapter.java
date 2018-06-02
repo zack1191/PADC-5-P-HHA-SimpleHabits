@@ -6,8 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hha.heinhtetaung.simplehabits.R;
+import com.hha.heinhtetaung.simplehabits.data.vo.CategoriesProgramVO;
 import com.hha.heinhtetaung.simplehabits.data.vo.ProgramVO;
-import com.hha.heinhtetaung.simplehabits.delegate.SimpleHabitsDelegate;
+import com.hha.heinhtetaung.simplehabits.delegate.CategoriesProgramDelegate;
 import com.hha.heinhtetaung.simplehabits.viewholders.ItemCategoriesProgramViewHolder;
 
 /**
@@ -15,9 +16,10 @@ import com.hha.heinhtetaung.simplehabits.viewholders.ItemCategoriesProgramViewHo
  */
 
 public class CategoriesProgramAdapter extends BaseRecyclerAdapter<ItemCategoriesProgramViewHolder, ProgramVO> {
-    private SimpleHabitsDelegate mDelegate;
+    private CategoriesProgramDelegate mDelegate;
+    private CategoriesProgramVO mRootCategory;
 
-    public CategoriesProgramAdapter(Context context, SimpleHabitsDelegate delegate) {
+    public CategoriesProgramAdapter(Context context, CategoriesProgramDelegate delegate) {
         super(context);
         mDelegate = delegate;
     }
@@ -26,6 +28,16 @@ public class CategoriesProgramAdapter extends BaseRecyclerAdapter<ItemCategories
     @Override
     public ItemCategoriesProgramViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mLayoutInflator.inflate(R.layout.item_healthy_mind, parent, false);
-        return new ItemCategoriesProgramViewHolder(view,mDelegate);
+        return new ItemCategoriesProgramViewHolder(view, mDelegate);
+    }
+
+    @Override
+    public void onBindViewHolder(ItemCategoriesProgramViewHolder holder, int position) {
+        holder.setData(mData.get(position));
+        holder.setCategory(mRootCategory);
+    }
+
+    public void setCategory(CategoriesProgramVO category) {
+        mRootCategory = category;
     }
 }

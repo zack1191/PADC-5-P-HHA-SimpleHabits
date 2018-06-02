@@ -9,13 +9,14 @@ import java.util.List;
  * Created by E5 on 5/23/2018.
  */
 
-public class CategoriesProgramVO implements ShareParentVO{
+public class CategoriesProgramVO implements ShareParentVO {
     @SerializedName("category-id")
     private String categoryId;
 
     private String title;
 
     private List<ProgramVO> programs;
+
 
     public String getCategoryId() {
         return categoryId;
@@ -40,4 +41,6 @@ public class CategoriesProgramVO implements ShareParentVO{
     public void setPrograms(List<ProgramVO> programs) {
         this.programs = programs;
     }
+
+
 }

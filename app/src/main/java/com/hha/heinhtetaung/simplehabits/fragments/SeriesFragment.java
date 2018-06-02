@@ -1,9 +1,11 @@
 package com.hha.heinhtetaung.simplehabits.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.hha.heinhtetaung.simplehabits.Activities.StartHereActivity;
+import com.hha.heinhtetaung.simplehabits.MainActivity;
 import com.hha.heinhtetaung.simplehabits.R;
+import com.hha.heinhtetaung.simplehabits.SimpleHabitApp;
 import com.hha.heinhtetaung.simplehabits.adapters.SeriesAdapter;
 import com.hha.heinhtetaung.simplehabits.data.models.SimpleModel;
-import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
-import com.hha.heinhtetaung.simplehabits.delegate.SimpleHabitsDelegate;
+import com.hha.heinhtetaung.simplehabits.delegate.CategoriesProgramDelegate;
+import com.hha.heinhtetaung.simplehabits.delegate.CurrentProgramDelegate;
+import com.hha.heinhtetaung.simplehabits.event.LoadNetworkErrorEvent;
 import com.hha.heinhtetaung.simplehabits.event.LoadReadyDataEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -31,13 +36,15 @@ import butterknife.ButterKnife;
  * Created by E5 on 5/17/2018.
  */
 
-public class SeriesFragment extends Fragment implements SimpleHabitsDelegate {
+public class SeriesFragment extends Fragment {
 
 
     @BindView(R.id.rv_list)
     RecyclerView rvList;
 
     private SeriesAdapter mSeriesAdapter;
+    private CurrentProgramDelegate mCurrentProgramDelegate;
+    private CategoriesProgramDelegate mCategoriesProgramDelegate;
 
 
     @Nullable
@@ -46,12 +53,11 @@ public class SeriesFragment extends Fragment implements SimpleHabitsDelegate {
         View view = inflater.inflate(R.layout.fragment_series, container, false);
         ButterKnife.bind(this, view);
 
-        EventBus.getDefault().register(this);
-        mSeriesAdapter = new SeriesAdapter(getContext(), this);
+
+        mSeriesAdapter = new SeriesAdapter(getContext(), mCurrentProgramDelegate, mCategoriesProgramDelegate);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         rvList.setLayoutManager(linearLayoutManager);
         rvList.setAdapter(mSeriesAdapter);
-
         SimpleModel.getsObjInstance().loadDatas();
 
         return view;
@@ -59,31 +65,36 @@ public class SeriesFragment extends Fragment implements SimpleHabitsDelegate {
 
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCurrentProgramDelegate = (CurrentProgramDelegate) context;
+        mCategoriesProgramDelegate = (CategoriesProgramDelegate) context;
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDataLoaded(LoadReadyDataEvent event) {
         mSeriesAdapter.setNewData(event.getShareParentVO());
     }
 
-
-    @Override
-    public void onTapStartHere(CurrentProgramVO tappedCurrent) {
-
-        Intent intent = new Intent(getContext(), StartHereActivity.class);
-        intent.putExtra("programId", tappedCurrent.getProgramId());
-        startActivity(intent);
-
-    }
-
-    @Override
-    public void onTapTopic() {
-        Toast.makeText(getContext(), "Tap all topics", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onTapCategories() {
-//        Intent intent = new Intent(getContext(), StartHereActivity.class);
-//        startActivity(intent);
-//        Toast.makeText(getContext(), "Tap Categories", Toast.LENGTH_SHORT).show();
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void networkError(LoadNetworkErrorEvent errorEvent) {
+        Snackbar.make(rvList.getRootView(), "Network Error!", Snackbar.LENGTH_INDEFINITE).show();
     }
 
 

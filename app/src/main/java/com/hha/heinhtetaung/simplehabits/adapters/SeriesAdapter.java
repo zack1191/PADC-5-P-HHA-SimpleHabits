@@ -11,7 +11,8 @@ import com.hha.heinhtetaung.simplehabits.ShareParentVO;
 import com.hha.heinhtetaung.simplehabits.data.vo.CategoriesProgramVO;
 import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
 import com.hha.heinhtetaung.simplehabits.data.vo.TopicVO;
-import com.hha.heinhtetaung.simplehabits.delegate.SimpleHabitsDelegate;
+import com.hha.heinhtetaung.simplehabits.delegate.CategoriesProgramDelegate;
+import com.hha.heinhtetaung.simplehabits.delegate.CurrentProgramDelegate;
 import com.hha.heinhtetaung.simplehabits.viewholders.BaseViewHolder;
 import com.hha.heinhtetaung.simplehabits.viewholders.CategoriesProgramViewHolder;
 import com.hha.heinhtetaung.simplehabits.viewholders.ItemAllTopicViewHolder;
@@ -28,13 +29,14 @@ public class SeriesAdapter extends BaseRecyclerAdapter<BaseViewHolder, SharePare
     private static final int HEALTHY_MIND = 1;
     private static final int ALL_TOPICS = 2;
 
-    private SimpleHabitsDelegate mCurrentProgramDelegate;
+    private CurrentProgramDelegate mCurrentProgramDelegate;
+    private CategoriesProgramDelegate mCategoriesProgramDelegate;
 
 
-
-    public SeriesAdapter(Context context, SimpleHabitsDelegate mCurrentProgramDelegate) {
+    public SeriesAdapter(Context context, CurrentProgramDelegate currentProgramDelegate, CategoriesProgramDelegate categoriesProgramDelegate) {
         super(context);
-        this.mCurrentProgramDelegate = mCurrentProgramDelegate;
+        this.mCurrentProgramDelegate = currentProgramDelegate;
+        this.mCategoriesProgramDelegate = categoriesProgramDelegate;
     }
 
     @NonNull
@@ -46,11 +48,11 @@ public class SeriesAdapter extends BaseRecyclerAdapter<BaseViewHolder, SharePare
                 viewHolder = new ItemCurrentProgramViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_start_here, parent, false), mCurrentProgramDelegate);
                 break;
             case HEALTHY_MIND:
-                viewHolder = new CategoriesProgramViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_healthy_mind, parent, false));
+                viewHolder = new CategoriesProgramViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_healthy_mind, parent, false), mCategoriesProgramDelegate);
                 break;
 
             case ALL_TOPICS:
-                viewHolder = new ItemAllTopicViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_all_topic, parent, false), mCurrentProgramDelegate);
+                viewHolder = new ItemAllTopicViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_all_topic, parent, false));
                 break;
         }
         return viewHolder;
