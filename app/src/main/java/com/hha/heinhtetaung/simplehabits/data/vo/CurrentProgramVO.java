@@ -15,7 +15,7 @@ import java.util.ListIterator;
  * Created by E5 on 5/23/2018.
  */
 
-public class CurrentProgramVO implements ShareParentVO{
+public class CurrentProgramVO implements ShareParentVO {
     @SerializedName("program-id")
     private String programId;
 
@@ -30,6 +30,8 @@ public class CurrentProgramVO implements ShareParentVO{
 
     @SerializedName("average-lengths")
     private List<Integer> averageLengths;
+
+    private List<SessionsVO> sessions;
 
     public String getProgramId() {
         return programId;
@@ -79,5 +81,11 @@ public class CurrentProgramVO implements ShareParentVO{
         this.averageLengths = averageLengths;
     }
 
+    public List<SessionsVO> getSessions() {
+        return sessions;
+    }
 
+    public void setSessions(List<SessionsVO> sessions) {
+        this.sessions = sessions;
+    }
 }

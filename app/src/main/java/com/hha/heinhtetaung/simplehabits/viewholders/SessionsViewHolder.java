@@ -21,6 +21,12 @@ public class SessionsViewHolder extends BaseViewHolder<SessionsVO> {
     @BindView(R.id.tv_sessions_title)
     TextView tvSessionTitle;
 
+    @BindView(R.id.tv_sessions_long_time)
+    TextView tvSessionLongTime;
+
+    @BindView(R.id.tv_number)
+    TextView tvNumber;
+
     public SessionsViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -29,8 +35,10 @@ public class SessionsViewHolder extends BaseViewHolder<SessionsVO> {
 
     @Override
     public void setData(SessionsVO data) {
-
         tvSessionTitle.setText(data.getTitle());
+        tvNumber.setText(data.getSessionId());
+        String lengthTime = data.getLengthInSeconds() / 60 + ":" + data.getLengthInSeconds() % 60;
+        tvSessionLongTime.setText(lengthTime);
     }
 
 

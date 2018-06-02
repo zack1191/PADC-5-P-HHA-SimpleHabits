@@ -1,13 +1,12 @@
 package com.hha.heinhtetaung.simplehabits.viewholders;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.hha.heinhtetaung.simplehabits.R;
 import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
-import com.hha.heinhtetaung.simplehabits.delegate.CurrentProgramDelegate;
+import com.hha.heinhtetaung.simplehabits.delegate.SimpleHabitsDelegate;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,9 +23,10 @@ public class ItemCurrentProgramViewHolder extends BaseViewHolder<CurrentProgramV
     @BindView(R.id.btn_start)
     Button btnStart;
 
-    private CurrentProgramDelegate mCurrentProgramDelegate;
+    private CurrentProgramVO mCurrent;
+    private SimpleHabitsDelegate mCurrentProgramDelegate;
 
-    public ItemCurrentProgramViewHolder(View itemView, CurrentProgramDelegate currentProgramDelegate) {
+    public ItemCurrentProgramViewHolder(View itemView, SimpleHabitsDelegate currentProgramDelegate) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         mCurrentProgramDelegate = currentProgramDelegate;
@@ -34,13 +34,15 @@ public class ItemCurrentProgramViewHolder extends BaseViewHolder<CurrentProgramV
 
     @Override
     public void setData(CurrentProgramVO data) {
+        mCurrent = data;
         tvTitle.setText(data.getTitle());
+
         btnStart.setText(data.getCurrentPeriod());
     }
 
     @OnClick(R.id.btn_start)
     public void onTapCurrentProgram(View view) {
-        mCurrentProgramDelegate.onTapStartHere();
+        mCurrentProgramDelegate.onTapStartHere(mCurrent);
     }
 
 

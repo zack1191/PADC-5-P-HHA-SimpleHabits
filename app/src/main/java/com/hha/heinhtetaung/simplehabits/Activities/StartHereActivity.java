@@ -12,22 +12,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hha.heinhtetaung.simplehabits.R;
+import com.hha.heinhtetaung.simplehabits.SimpleHabitApp;
 import com.hha.heinhtetaung.simplehabits.adapters.SessionsAdapter;
+
+
 import com.hha.heinhtetaung.simplehabits.data.models.SimpleModel;
+import com.hha.heinhtetaung.simplehabits.data.vo.CategoriesProgramVO;
 import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
+import com.hha.heinhtetaung.simplehabits.data.vo.ProgramVO;
 import com.hha.heinhtetaung.simplehabits.data.vo.SessionsVO;
 import com.hha.heinhtetaung.simplehabits.event.LoadReadyDataEvent;
 import com.hha.heinhtetaung.simplehabits.event.LoadSimpleHabitEvent;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by E5 on 5/27/2018.
@@ -45,7 +51,10 @@ public class StartHereActivity extends AppCompatActivity {
     @BindView(R.id.rv_sessions_recycler)
     RecyclerView rvSessions;
 
+
     private SessionsAdapter mSessionsAdapter;
+    private CurrentProgramVO currentProgramVO;
+    private List<CategoriesProgramVO> categoriesProgramVO;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, StartHereActivity.class);
@@ -72,14 +81,13 @@ public class StartHereActivity extends AppCompatActivity {
         rvSessions.setLayoutManager(layoutManager);
         rvSessions.setAdapter(mSessionsAdapter);
 
-        SimpleModel.getsObjInstance().loadDatas();
+        int viewtype = getIntent().getIntExtra(SimpleHabitApp.CURRENT_PROGRAM, 0);
 
-        CurrentProgramVO mCurrent = new CurrentProgramVO();
-        bindData(mCurrent);
+        currentProgramVO = (CurrentProgramVO) SimpleModel.getsObjInstance().getSerisData().get(viewtype);
+        mSessionsAdapter.setNewData(currentProgramVO.getSessions());
 
-    }
-    public void bindData(CurrentProgramVO current){
-        tvDownLoadDisc.setText(current.getDescription());
+        tvDownLoadDisc.setText(currentProgramVO.getDescription());
+        
     }
 
 
@@ -98,8 +106,5 @@ public class StartHereActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-   @Subscribe(threadMode = ThreadMode.MAIN)
-   public void onDataLoaded(LoadReadyDataEvent event){
-       mSessionsAdapter.setNewData(event.getShareParentVO());
-  }
+
 }

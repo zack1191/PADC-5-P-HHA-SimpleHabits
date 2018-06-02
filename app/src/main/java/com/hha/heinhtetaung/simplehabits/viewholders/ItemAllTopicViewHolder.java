@@ -1,16 +1,16 @@
 package com.hha.heinhtetaung.simplehabits.viewholders;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.hha.heinhtetaung.simplehabits.R;
 import com.hha.heinhtetaung.simplehabits.data.vo.TopicVO;
+import com.hha.heinhtetaung.simplehabits.delegate.SimpleHabitsDelegate;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by E5 on 5/22/2018.
@@ -28,12 +28,14 @@ public class ItemAllTopicViewHolder extends BaseViewHolder<TopicVO> {
 
     @BindView(R.id.iv_topic_background)
     ImageView ivBackground;
+    private SimpleHabitsDelegate mCurrentProgramDelegate;
 
 
-    public ItemAllTopicViewHolder(View itemView) {
+    public ItemAllTopicViewHolder(View itemView, SimpleHabitsDelegate currentProgramDelegate) {
 
         super(itemView);
         ButterKnife.bind(this, itemView);
+        mCurrentProgramDelegate = currentProgramDelegate;
 
     }
 
@@ -43,6 +45,11 @@ public class ItemAllTopicViewHolder extends BaseViewHolder<TopicVO> {
         tvHeader.setText(data.getTopicName());
     }
 
+    @OnClick(R.id.rl_topics)
+    public void onTapItemTopic() {
+        mCurrentProgramDelegate.onTapTopic();
+
+    }
 
 
 }

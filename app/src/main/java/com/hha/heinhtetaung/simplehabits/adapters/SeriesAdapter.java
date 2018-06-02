@@ -11,7 +11,7 @@ import com.hha.heinhtetaung.simplehabits.ShareParentVO;
 import com.hha.heinhtetaung.simplehabits.data.vo.CategoriesProgramVO;
 import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
 import com.hha.heinhtetaung.simplehabits.data.vo.TopicVO;
-import com.hha.heinhtetaung.simplehabits.delegate.CurrentProgramDelegate;
+import com.hha.heinhtetaung.simplehabits.delegate.SimpleHabitsDelegate;
 import com.hha.heinhtetaung.simplehabits.viewholders.BaseViewHolder;
 import com.hha.heinhtetaung.simplehabits.viewholders.CategoriesProgramViewHolder;
 import com.hha.heinhtetaung.simplehabits.viewholders.ItemAllTopicViewHolder;
@@ -28,11 +28,11 @@ public class SeriesAdapter extends BaseRecyclerAdapter<BaseViewHolder, SharePare
     private static final int HEALTHY_MIND = 1;
     private static final int ALL_TOPICS = 2;
 
-    private CurrentProgramDelegate mCurrentProgramDelegate;
+    private SimpleHabitsDelegate mCurrentProgramDelegate;
 
 
 
-    public SeriesAdapter(Context context, CurrentProgramDelegate mCurrentProgramDelegate) {
+    public SeriesAdapter(Context context, SimpleHabitsDelegate mCurrentProgramDelegate) {
         super(context);
         this.mCurrentProgramDelegate = mCurrentProgramDelegate;
     }
@@ -50,7 +50,7 @@ public class SeriesAdapter extends BaseRecyclerAdapter<BaseViewHolder, SharePare
                 break;
 
             case ALL_TOPICS:
-                viewHolder = new ItemAllTopicViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_all_topic, parent, false));
+                viewHolder = new ItemAllTopicViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_all_topic, parent, false), mCurrentProgramDelegate);
                 break;
         }
         return viewHolder;

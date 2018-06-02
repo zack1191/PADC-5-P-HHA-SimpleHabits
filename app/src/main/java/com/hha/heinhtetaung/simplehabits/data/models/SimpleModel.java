@@ -12,6 +12,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +31,12 @@ public class SimpleModel {
         EventBus.getDefault().register(this);
         serisData = new ArrayList<>();
 
+
     }
 
+    public List<ShareParentVO> getSerisData() {
+        return serisData;
+    }
 
     public static SimpleModel getsObjInstance() {
         if (sObjInstance == null) {
@@ -43,7 +48,6 @@ public class SimpleModel {
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onDataloaded(LoadSimpleHabitEvent.LoadTopicEvent event) {
         serisData.addAll(event.getTopics());
-
         LoadReadyDataEvent loadReadyDataEvent = new LoadReadyDataEvent(serisData);
         EventBus.getDefault().post(loadReadyDataEvent);
 
@@ -51,7 +55,8 @@ public class SimpleModel {
 
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onCureentProgramLoaded(LoadSimpleHabitEvent.LoadCurrentProgramEvent event) {
-        serisData.add(event.getCurrentProgram());
+        CurrentProgramVO currentProgramV0 = event.getCurrentProgram();
+        serisData.add(currentProgramV0);
         SimpleHabitsRetrofitDataAgent.getsObjInstance().loadCategoriesProgram();
 
 

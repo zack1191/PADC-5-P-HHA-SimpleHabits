@@ -10,12 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.hha.heinhtetaung.simplehabits.Activities.StartHereActivity;
 import com.hha.heinhtetaung.simplehabits.R;
 import com.hha.heinhtetaung.simplehabits.adapters.SeriesAdapter;
 import com.hha.heinhtetaung.simplehabits.data.models.SimpleModel;
-import com.hha.heinhtetaung.simplehabits.delegate.CurrentProgramDelegate;
+import com.hha.heinhtetaung.simplehabits.data.vo.CurrentProgramVO;
+import com.hha.heinhtetaung.simplehabits.delegate.SimpleHabitsDelegate;
 import com.hha.heinhtetaung.simplehabits.event.LoadReadyDataEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -29,7 +31,7 @@ import butterknife.ButterKnife;
  * Created by E5 on 5/17/2018.
  */
 
-public class SeriesFragment extends Fragment implements CurrentProgramDelegate {
+public class SeriesFragment extends Fragment implements SimpleHabitsDelegate {
 
 
     @BindView(R.id.rv_list)
@@ -64,10 +66,25 @@ public class SeriesFragment extends Fragment implements CurrentProgramDelegate {
 
 
     @Override
-    public void onTapStartHere() {
+    public void onTapStartHere(CurrentProgramVO tappedCurrent) {
 
-        Intent intent = StartHereActivity.newIntent(getContext());
+        Intent intent = new Intent(getContext(), StartHereActivity.class);
+        intent.putExtra("programId", tappedCurrent.getProgramId());
         startActivity(intent);
 
     }
+
+    @Override
+    public void onTapTopic() {
+        Toast.makeText(getContext(), "Tap all topics", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTapCategories() {
+//        Intent intent = new Intent(getContext(), StartHereActivity.class);
+//        startActivity(intent);
+//        Toast.makeText(getContext(), "Tap Categories", Toast.LENGTH_SHORT).show();
+    }
+
+
 }
