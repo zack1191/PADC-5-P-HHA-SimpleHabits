@@ -3,8 +3,6 @@ package com.hha.heinhtetaung.simplehabits;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.hha.heinhtetaung.simplehabits.Activities.StartHereActivity;
+import com.hha.heinhtetaung.simplehabits.activities.DetailProgramActivity;
 import com.hha.heinhtetaung.simplehabits.adapters.BottomBarAdapter;
 import com.hha.heinhtetaung.simplehabits.adapters.TabAdapter;
 import com.hha.heinhtetaung.simplehabits.delegate.CategoriesProgramDelegate;
@@ -20,14 +18,11 @@ import com.hha.heinhtetaung.simplehabits.delegate.CurrentProgramDelegate;
 import com.hha.heinhtetaung.simplehabits.fragments.MeFragment;
 import com.hha.heinhtetaung.simplehabits.fragments.MeditateFragment;
 import com.hha.heinhtetaung.simplehabits.fragments.MoreFragment;
-import com.hha.heinhtetaung.simplehabits.fragments.OnthegoFragment;
-import com.hha.heinhtetaung.simplehabits.fragments.SeriesFragment;
-import com.hha.heinhtetaung.simplehabits.fragments.TeachersFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements CurrentProgramDelegate, CategoriesProgramDelegate {
+public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -47,7 +42,10 @@ public class MainActivity extends AppCompatActivity implements CurrentProgramDel
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this, this);
         setSupportActionBar(toolbar);
-
+        MenuItem item = bottomNavigationView.getMenu().findItem(R.id.it_meditate);
+        if (item.isCheckable() || item.isChecked()) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, new MeditateFragment()).commit();
+        }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -89,15 +87,15 @@ public class MainActivity extends AppCompatActivity implements CurrentProgramDel
     }
 
 
-    @Override
-    public void onTapCategories(String categoryId, String categoryProgramId) {
-        Intent intent = StartHereActivity.newIntentCategories(getApplicationContext(), categoryId, categoryProgramId);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onTapStartHere() {
-        Intent intent = StartHereActivity.newIntentCurrent(getApplicationContext());
-        startActivity(intent);
-    }
+//    @Override
+//    public void onTapCategories(String categoryId, String categoryProgramId) {
+//        Intent intent = DetailProgramActivity.newIntentCategories(getApplicationContext(), categoryId, categoryProgramId);
+//        startActivity(intent);
+//    }
+//
+//    @Override
+//    public void onTapStartHere() {
+//        Intent intent = DetailProgramActivity.newIntentCurrent(getApplicationContext());
+//        startActivity(intent);
+//    }
 }

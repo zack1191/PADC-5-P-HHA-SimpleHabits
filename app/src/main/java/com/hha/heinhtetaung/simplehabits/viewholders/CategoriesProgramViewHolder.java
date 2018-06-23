@@ -34,8 +34,6 @@ public class CategoriesProgramViewHolder extends BaseViewHolder<CategoriesProgra
 
         ButterKnife.bind(this, itemView);
         mCategoriesProgramDelegate = categoriesProgramDelegate;
-
-
         mCategoriesProgramAdapter = new CategoriesProgramAdapter(itemView.getContext(), mCategoriesProgramDelegate);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false);
         rvHealthy.setLayoutManager(linearLayoutManager);

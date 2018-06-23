@@ -84,30 +84,6 @@ public class SimpleModel {
 
     }
 
-//    public ProgramVO getProgramByProgramId(String programId) {
-//        ProgramVO programVO = null;
-//        for (int i = 0; i < serisData.size(); i++) {
-//            if (serisData.get(i) instanceof CategoriesProgramVO) {
-//                for (int j = 0; j < ((CategoriesProgramVO) serisData.get(i)).getPrograms().size(); j++) {
-//                    String id = ((CategoriesProgramVO) serisData.get(i)).getPrograms().get(j).getProgramId();
-//                    if (id.equals(programId))
-//                        programVO = ((CategoriesProgramVO) serisData.get(i)).getPrograms().get(j);
-//                }
-//            }
-//        }
-//        return programVO;
-//    }
-
-    //    public CurrentProgramVO getProgramsByProgramId(String programId) {
-//        CurrentProgramVO currentProgramVO = null;
-//        for (int i = 0; i < serisData.size(); i++) {
-//            if (serisData.get(i) instanceof CurrentProgramVO) {
-//                if (((CurrentProgramVO) serisData.get(i)).getProgramId().equals(programId))
-//                    currentProgramVO = (CurrentProgramVO) serisData.get(i);
-//          return currentProgramVO;
-//    }    }
-//        }
-//
     public CurrentProgramVO getCurrentProgram() {
         for (ShareParentVO obj : serisData) {
             if (obj instanceof CurrentProgramVO)
@@ -116,13 +92,28 @@ public class SimpleModel {
         return null;
     }
 
-    public ProgramVO getProgram(String categoryId, String categoryProgramId) {
-        for (int i = 0; i < serisData.size(); i++) {
-            if (serisData.get(i) instanceof CategoriesProgramVO) {
-                if (((CategoriesProgramVO) serisData.get(i)).getCategoryId().equals(categoryId)) {
-                    for (int j = 0; j < ((CategoriesProgramVO) serisData.get(i)).getPrograms().size(); j++) {
-                        if (((CategoriesProgramVO) serisData.get(i)).getPrograms().get(j).getProgramId().equals(categoryProgramId)) {
-                            return ((CategoriesProgramVO) serisData.get(i)).getPrograms().get(j);
+    //    public ProgramVO getProgram(String categoryId, String categoryProgramId) {
+//        for (int i = 0; i < serisData.size(); i++) {
+//            if (serisData.get(i) instanceof CategoriesProgramVO) {
+//                if (((CategoriesProgramVO) serisData.get(i)).getCategoryId().equals(categoryId)) {
+//                    for (int j = 0; j < ((CategoriesProgramVO) serisData.get(i)).getPrograms().size(); j++) {
+//                        if (((CategoriesProgramVO) serisData.get(i)).getPrograms().get(j).getProgramId().equals(categoryProgramId)) {
+//                            return ((CategoriesProgramVO) serisData.get(i)).getPrograms().get(j);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        return null;
+//    }
+    public ProgramVO getCategoriesProgramsItemVO(String categoryId, String categoryItemId) {
+        for (ShareParentVO mainVO : serisData) {
+            if (mainVO instanceof CategoriesProgramVO) {
+                if (((CategoriesProgramVO) mainVO).getCategoryId().equals(categoryId)) {
+                    for (ProgramVO categoriesProgramsItemVO : ((CategoriesProgramVO) mainVO).getPrograms()) {
+                        if (categoriesProgramsItemVO.getProgramId().equals(categoryItemId)) {
+                            return categoriesProgramsItemVO;
                         }
                     }
                 }

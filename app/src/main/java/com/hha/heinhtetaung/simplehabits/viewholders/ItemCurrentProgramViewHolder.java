@@ -29,7 +29,7 @@ public class ItemCurrentProgramViewHolder extends BaseViewHolder<CurrentProgramV
     public ItemCurrentProgramViewHolder(View itemView, CurrentProgramDelegate currentProgramDelegate) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        mCurrentProgramDelegate = currentProgramDelegate;
+        this.mCurrentProgramDelegate = currentProgramDelegate;
     }
 
     @Override
